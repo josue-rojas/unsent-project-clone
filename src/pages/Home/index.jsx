@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ColorPicker from "components/ColorPicker";
+import TextColorPicker from "components/TextColorPicker";
 
 const initColor = "#96d35f";
 
@@ -8,7 +8,7 @@ const Home = () => {
 
   return (
     <div>
-      <ColorPicker
+      <TextColorPicker
         initColor={initColor}
         colorOnChange={c => backgroundColorChange(c)}
       />

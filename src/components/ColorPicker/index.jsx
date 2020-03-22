@@ -3,7 +3,7 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import styles from "./styles.module.css";
 
-const ColorPicker = ({ className, colorOnChange, initColor }) => {
+const ColorPicker = ({ children, className, colorOnChange, initColor }) => {
   const inputRef = useRef(null);
   const [color, colorChange] = useState(initColor);
 
@@ -19,9 +19,7 @@ const ColorPicker = ({ className, colorOnChange, initColor }) => {
 
   return (
     <div className={classNames(className, styles.inputWrapper)}>
-      <div className={styles.inputDisplay} onClick={focusInput}>
-        ABC
-      </div>
+      <div onClick={focusInput}>{children}</div>
       <input
         className={styles.input}
         onChange={handleColorOnChange}
@@ -38,6 +36,7 @@ ColorPicker.defaultProps = {
 };
 
 ColorPicker.propTypes = {
+  children: PropTypes.node,
   className: PropTypes.string,
   colorOnChange: PropTypes.func,
   initColor: PropTypes.string
