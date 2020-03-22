@@ -3,7 +3,13 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import styles from "./styles.module.css";
 
-const ColorPicker = ({ children, className, colorOnChange, initColor }) => {
+const ColorPicker = ({
+  children,
+  className,
+  colorOnChange,
+  initColor,
+  readOnly
+}) => {
   const inputRef = useRef(null);
   const [color, colorChange] = useState(initColor);
 
@@ -14,11 +20,18 @@ const ColorPicker = ({ children, className, colorOnChange, initColor }) => {
   };
 
   const focusInput = _ => {
-    inputRef.current.click();
+    if (!readOnly) {
+      inputRef.current.click();
+      inputRef.current.focus();
+    }
   };
 
   return (
-    <div className={classNames(className, styles.inputWrapper)}>
+    <div
+      className={classNames(className, styles.inputWrapper, {
+        [styles.isDisabled]: readOnly
+      })}
+    >
       <div onClick={focusInput}>{children}</div>
       <input
         className={styles.input}
@@ -26,6 +39,7 @@ const ColorPicker = ({ children, className, colorOnChange, initColor }) => {
         ref={inputRef}
         type="color"
         value={color}
+        readOnly={readOnly}
       ></input>
     </div>
   );
@@ -39,7 +53,8 @@ ColorPicker.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   colorOnChange: PropTypes.func,
-  initColor: PropTypes.string
+  initColor: PropTypes.string,
+  readOnly: PropTypes.bool
 };
 
 export default ColorPicker;

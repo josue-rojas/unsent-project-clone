@@ -1,0 +1,61 @@
+.unsentBox {
+  border: 2px solid black;
+  display: inline-block;
+  padding: 2px;
+}
+
+.top {
+  display: flex;
+  font-size: 16px;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.textWrapper {
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  padding: 0 10px;
+}
+
+.textWrapper label {
+  margin-right: 5px;
+}
+
+.toInput {
+  border: 0;
+  font-size: 16px;
+  margin: 0;
+  max-width: 150px;
+  padding: 0;
+  text-align: center;
+}
+
+.toInput:focus {
+  outline: none;
+  outline-style: none;
+}
+
+.middle {
+  display: flex;
+  justify-content: center;
+  padding: 0 8px;
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bkgColorPicker {
+  background-color: black;
+  cursor: pointer;
+  height: 100%;
+  left: -32px;
+  position: absolute;
+  width: 32px;
+}
+
+.clickable {
+  cursor: pointer;
+}
