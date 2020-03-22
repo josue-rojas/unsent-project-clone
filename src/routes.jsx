@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Home from "pages/Home";
 
 export default function Routes() {
   return (
@@ -7,7 +8,7 @@ export default function Routes() {
       <div>
         <Switch>
           <Route exact path="/">
-            <div>Main page</div>
+            <Home />
           </Route>
           <Route exact path="/post/:id">
             <div>Post page</div>

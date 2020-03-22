@@ -1,0 +1,18 @@
+.inputWrapper {
+  display: inline-block;
+  position: relative;
+}
+
+.inputDisplay {
+  background-color: black;
+  color: white;
+}
+
+.input {
+  left: 0;
+  height: 100%;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
