@@ -16,3 +16,17 @@ body {
 *:after {
   box-sizing: inherit;
 }
+
+a {
+  color: black;
+  text-decoration: none;
+  transition: 250ms opacity;
+}
+
+a:visited {
+  color: black;
+}
+
+a:hover {
+  opacity: 0.8;
+}

@@ -8,6 +8,7 @@ const ColorTextArea = ({
   className,
   maxChar,
   onChange,
+  readOnly,
   rows,
   textColor
 }) => {
@@ -30,8 +31,9 @@ const ColorTextArea = ({
         rows={rows}
         style={{ backgroundColor: backgroundColor, color: textColor }}
         value={text}
+        readOnly={readOnly}
       ></textarea>
-      {maxChar && (
+      {maxChar && !readOnly && (
         <span className={styles.char} style={{ color: textColor }}>
           {text.length}/{maxChar}
         </span>
@@ -42,6 +44,7 @@ const ColorTextArea = ({
 
 ColorTextArea.defaultProps = {
   maxChar: 240,
+  readOnly: false,
   rows: 13
 };
 
@@ -50,6 +53,7 @@ ColorTextArea.propTypes = {
   className: PropTypes.string,
   maxChar: PropTypes.number,
   onChange: PropTypes.func,
+  readOnly: PropTypes.bool,
   rows: PropTypes.number,
   textColor: PropTypes.string
 };

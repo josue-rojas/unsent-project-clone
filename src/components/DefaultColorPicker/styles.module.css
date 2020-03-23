@@ -1,0 +1,10 @@
+.colorPicker {
+  display: inline-flex;
+}
+
+.inputDisplay {
+  background-color: black;
+  cursor: pointer;
+  height: 100%;
+  width: 32px;
+}

@@ -1,14 +1,17 @@
 .textWrapper {
   display: inline-block;
   position: relative;
+  width: 100%;
 }
 
 .textWrapper textarea {
   -webkit-appearance: none;
   border: 0;
-  font-size: 16px;
+  border-radius: 0;
+  font-size: 18px;
   resize: none;
   padding: 7px 7px 14px;
+  width: 100%;
 }
 
 .textWrapper textarea:focus {

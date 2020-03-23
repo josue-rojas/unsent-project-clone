@@ -1,27 +1,32 @@
-import React, { useState } from "react";
-import TextColorPicker from "components/TextColorPicker";
-import ColorTextArea from "components/ColorTextArea";
+import React from "react";
+import UnsentBox from "components/UnsentBox";
+import styles from "./styles.module.css";
 
-const initTextColor = "#0";
-const initBackgroundColor = "#96d35f";
+const getRandomInt = max => {
+  return Math.floor(Math.random() * Math.floor(max));
+};
+
+const randomColor = () => {
+  return `rgb(${getRandomInt(256)}, ${getRandomInt(256)}, ${getRandomInt(
+    256
+  )})`;
+};
+
+const initTextColor = randomColor();
+const initBackgroundColor = randomColor();
+
+const sendCallBack = data => {
+  console.log("sending", data);
+};
 
 const Home = () => {
-  const [backgroundColor, backgroundColorChange] = useState(
-    initBackgroundColor
-  );
-  const [textColor, textColorChange] = useState(initTextColor);
-
   return (
-    <div>
-      <TextColorPicker
-        initColor={backgroundColor}
-        colorOnChange={c => backgroundColorChange(c)}
+    <div className={styles.home}>
+      <UnsentBox
+        initBackgroundColor={initBackgroundColor}
+        initTextColor={initTextColor}
+        sendCallBack={sendCallBack}
       />
-      <TextColorPicker
-        initColor={textColor}
-        colorOnChange={c => textColorChange(c)}
-      />
-      <ColorTextArea backgroundColor={backgroundColor} textColor={textColor} />
     </div>
   );
 };

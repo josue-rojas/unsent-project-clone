@@ -3,23 +3,23 @@ import PropTypes from "prop-types";
 import ColorPicker from "components/ColorPicker";
 import styles from "./styles.module.css";
 
-const TextColorPicker = props => {
+const DefaultColorPicker = props => {
   return (
-    <ColorPicker {...props}>
-      <div className={styles.inputDisplay}>ABC</div>
+    <ColorPicker {...props} className={styles.colorPicker}>
+      <div className={styles.inputDisplay}></div>
     </ColorPicker>
   );
 };
 
-TextColorPicker.defaultProps = {
+DefaultColorPicker.defaultProps = {
   initColor: "#0"
 };
 
-TextColorPicker.propTypes = {
+DefaultColorPicker.propTypes = {
   className: PropTypes.string,
   colorOnChange: PropTypes.func,
   initColor: PropTypes.string,
   readOnly: PropTypes.bool
 };
 
-export default TextColorPicker;
+export default DefaultColorPicker;
