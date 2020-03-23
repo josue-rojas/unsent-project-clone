@@ -16,6 +16,7 @@ const UnsentBox = ({
     initBackgroundColor
   );
   const [textColor, textColorChange] = useState(initTextColor);
+  const [toValue, toValueChange] = useState("");
   const [text, textChange] = useState("");
 
   const sendData = () => {
@@ -24,7 +25,8 @@ const UnsentBox = ({
       sendCallBack({
         backgroundColor: backgroundColor,
         textColor: textColor,
-        text: text
+        text: text,
+        to: toValue
       });
   };
 
@@ -41,8 +43,10 @@ const UnsentBox = ({
           <input
             className={styles.toInput}
             id="sender"
+            onChange={_ => toValueChange(_.target.value)}
             type="text"
             readOnly={isDisabled}
+            value={toValue}
           />
         </span>
         <DefaultColorPicker
