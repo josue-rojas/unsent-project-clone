@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import styles from "./styles.module.css";
@@ -10,19 +10,23 @@ const ColorTextArea = ({
   onChange,
   readOnly,
   rows,
-  textColor
+  textColor,
+  value
 }) => {
   const [text, textChange] = useState("");
 
   const textOnChange = e => {
     let newText = e.target.value;
-    if (maxChar && !newText.length < maxChar + 1) {
+    if (maxChar && !newText.length < maxChar + 1)
       newText = newText.substring(0, maxChar);
-    }
 
     textChange(newText);
     onChange && onChange(newText);
   };
+
+  useEffect(() => {
+    if (!!value && value !== text) textChange(value);
+  }, [text, value]);
 
   return (
     <div className={classNames(className, styles.textWrapper)}>
@@ -55,7 +59,8 @@ ColorTextArea.propTypes = {
   onChange: PropTypes.func,
   readOnly: PropTypes.bool,
   rows: PropTypes.number,
-  textColor: PropTypes.string
+  textColor: PropTypes.string,
+  value: PropTypes.string
 };
 
 export default ColorTextArea;

@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "pages/Home";
+import SinglePost from "pages/SinglePost";
 
 export default function Routes() {
   return (
@@ -11,7 +12,7 @@ export default function Routes() {
             <Home />
           </Route>
           <Route exact path="/post/:id">
-            <div>Post page</div>
+            <SinglePost />
           </Route>
           <Route exact path="/new">
             <div>New post</div>
