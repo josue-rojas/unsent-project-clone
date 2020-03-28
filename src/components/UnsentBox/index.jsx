@@ -43,6 +43,16 @@ const UnsentBox = ({
     if (!!initTo && initTo !== toValue) toValueChange(initTo);
   }, [initTo, toValue]);
 
+  useEffect(() => {
+    if (!!initBackgroundColor && initBackgroundColor !== backgroundColor)
+      backgroundColorChange(initBackgroundColor);
+  }, [initBackgroundColor, backgroundColor]);
+
+  useEffect(() => {
+    if (!!initTextColor && initTextColor !== textColor)
+      textColorChange(initTextColor);
+  }, [initTextColor, textColor]);
+
   // handle value changes for text as a parent woulld normally do
   // but since not all parents care for their child,
   // it only alerts it for those that care (fake 2 way binding cause you also need to keep track of the change in the parent else is readonly)
