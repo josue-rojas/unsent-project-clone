@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import styles from "./styles.module.css";
 
@@ -8,16 +8,20 @@ import ColorTextArea from "components/ColorTextArea";
 
 const UnsentBox = ({
   initBackgroundColor,
+  initMessage,
   initTextColor,
+  initTo,
   isDisabled,
-  sendCallBack
+  sendCallBack,
+  textOnchange,
+  toOnChange
 }) => {
   const [backgroundColor, backgroundColorChange] = useState(
     initBackgroundColor
   );
   const [textColor, textColorChange] = useState(initTextColor);
-  const [toValue, toValueChange] = useState("");
-  const [text, textChange] = useState("");
+  const [toValue, toValueChange] = useState(initTo);
+  const [text, textChange] = useState(initMessage);
 
   const sendData = () => {
     !isDisabled &&
@@ -28,6 +32,38 @@ const UnsentBox = ({
         text: text,
         to: toValue
       });
+  };
+
+  useEffect(() => {
+    if (!!initMessage && initMessage !== text) textChange(initMessage);
+  }, [initMessage, text]);
+
+  // if initto is define and it is not handle up the chain then it will become readonly
+  useEffect(() => {
+    if (!!initTo && initTo !== toValue) toValueChange(initTo);
+  }, [initTo, toValue]);
+
+  useEffect(() => {
+    if (!!initBackgroundColor && initBackgroundColor !== backgroundColor)
+      backgroundColorChange(initBackgroundColor);
+  }, [initBackgroundColor, backgroundColor]);
+
+  useEffect(() => {
+    if (!!initTextColor && initTextColor !== textColor)
+      textColorChange(initTextColor);
+  }, [initTextColor, textColor]);
+
+  // handle value changes for text as a parent woulld normally do
+  // but since not all parents care for their child,
+  // it only alerts it for those that care (fake 2 way binding cause you also need to keep track of the change in the parent else is readonly)
+  const _textOnchange = nextValue => {
+    textChange(nextValue);
+    textOnchange && textOnchange(nextValue);
+  };
+
+  const _toOnChange = nextValue => {
+    toValueChange(nextValue);
+    toOnChange && toOnChange(nextValue);
   };
 
   return (
@@ -43,7 +79,7 @@ const UnsentBox = ({
           <input
             className={styles.toInput}
             id="sender"
-            onChange={_ => toValueChange(_.target.value)}
+            onChange={_ => _toOnChange(_.target.value)}
             type="text"
             readOnly={isDisabled}
             value={toValue}
@@ -58,9 +94,10 @@ const UnsentBox = ({
       <div className={styles.middle}>
         <ColorTextArea
           backgroundColor={backgroundColor}
-          onChange={textChange}
+          onChange={_textOnchange}
           textColor={textColor}
           readOnly={isDisabled}
+          value={text}
         />
       </div>
       <div className={styles.bottom}>
@@ -79,11 +116,20 @@ const UnsentBox = ({
   );
 };
 
+UnsentBox.defaultProps = {
+  initMessage: "",
+  initTo: ""
+};
+
 UnsentBox.propTypes = {
   initBackgroundColor: PropTypes.string,
+  initMessage: PropTypes.string,
   initTextColor: PropTypes.string,
+  initTo: PropTypes.string,
   isDisabled: PropTypes.bool,
-  sendCallBack: PropTypes.func
+  sendCallBack: PropTypes.func,
+  textOnchange: PropTypes.func,
+  toOnchange: PropTypes.func
 };
 
 export default UnsentBox;
