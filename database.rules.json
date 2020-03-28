@@ -1,7 +1,5 @@
 {
   "rules": {
-    ".read": false,
-    ".write": false,
     "post": {
       "$postNumber": {
         "backgroundColor": { ".validate": true },
@@ -10,14 +8,14 @@
         "to": { ".validate": true },
         "$other": { ".validate": false },
         ".read": true,
-        ".write": "!data.exists()",
-        ".validate": false
+        ".write": "!data.exists()"
       }
     },
     "amountPost": {
       ".read": true,
-      ".write": false,
-      ".validate": false
+      ".write": "auth != null",
+      ".validate": "newData.isNumber()",
+      "$other": { ".validate": false }
     },
     "$other": { ".validate": false }
   }
