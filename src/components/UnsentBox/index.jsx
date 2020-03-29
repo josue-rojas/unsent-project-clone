@@ -34,17 +34,6 @@ const UnsentBox = ({
   const [text, textChange] = useState(initMessage);
   const history = useHistory();
 
-  const sendData = () => {
-    !isDisabled &&
-      sendCallBack &&
-      sendCallBack({
-        backgroundColor: backgroundColor,
-        textColor: textColor,
-        text: text,
-        to: toValue
-      });
-  };
-
   useEffect(() => {
     if (!!initMessage && initMessage !== text) textChange(initMessage);
   }, [initMessage, text]);
@@ -75,6 +64,22 @@ const UnsentBox = ({
   const _toOnChange = nextValue => {
     toValueChange(nextValue);
     toOnChange && toOnChange(nextValue);
+  };
+
+  const sendData = () => {
+    // TODO: make this more efficiencent or at least check when onchange ?!?!
+    const isTextMin = text.length > 0;
+    const isTotMin = toValue.length > 0;
+    !isDisabled &&
+      sendCallBack &&
+      isTotMin &&
+      isTextMin &&
+      sendCallBack({
+        backgroundColor: backgroundColor,
+        textColor: textColor,
+        text: text,
+        to: toValue
+      });
   };
 
   return (
