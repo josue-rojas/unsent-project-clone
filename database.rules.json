@@ -1,6 +1,7 @@
 {
   "rules": {
     "post": {
+      ".read": true,
       "$postNumber": {
         "backgroundColor": { ".validate": true },
         "textColor": { ".validate": true },
