@@ -5,19 +5,6 @@ import { database } from "firebase.js";
 import { useHistory } from "react-router-dom";
 import { POST_MESSAGE_API } from "constants.js";
 
-const getRandomInt = max => {
-  return Math.floor(Math.random() * Math.floor(max));
-};
-
-const randomColor = () => {
-  return `rgb(${getRandomInt(256)}, ${getRandomInt(256)}, ${getRandomInt(
-    256
-  )})`;
-};
-
-const initTextColor = randomColor();
-const initBackgroundColor = randomColor();
-
 const Home = () => {
   const history = useHistory();
 
@@ -28,11 +15,7 @@ const Home = () => {
 
   return (
     <div className={styles.home}>
-      <UnsentBox
-        initBackgroundColor={initBackgroundColor}
-        initTextColor={initTextColor}
-        sendCallBack={sendCallBack}
-      />
+      <UnsentBox sendCallBack={sendCallBack} />
     </div>
   );
 };
