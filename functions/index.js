@@ -13,7 +13,7 @@ exports.addPost = functions.database
           .ref("/amountPost")
           .set(typeof _snapshot.val() === "number" ? _snapshot.val() + 1 : 1)
       )
-      .catch(e => db.ref("/amountPost").set(1));
+      .catch(e => console.log("error", e));
   });
 
 exports.deletePost = functions.database
@@ -30,5 +30,5 @@ exports.deletePost = functions.database
               : 0
           )
       )
-      .catch(e => db.ref("/amountPost").set(0));
+      .catch(e => console.log("error", e));
   });
