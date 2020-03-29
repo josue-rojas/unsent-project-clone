@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import styles from "./styles.module.css";
-
+import { useHistory } from "react-router-dom";
 import TextColorPicker from "components/TextColorPicker";
 import DefaultColorPicker from "components/DefaultColorPicker";
 import ColorTextArea from "components/ColorTextArea";
@@ -32,6 +32,7 @@ const UnsentBox = ({
   const [textColor, textColorChange] = useState(initTextColor || randomColor());
   const [toValue, toValueChange] = useState(initTo);
   const [text, textChange] = useState(initMessage);
+  const history = useHistory();
 
   const sendData = () => {
     !isDisabled &&
@@ -120,7 +121,9 @@ const UnsentBox = ({
         {
           //"TODO: still not sure what to do with back"
         }
-        <span className={styles.clickable}>Back</span>
+        <span onClick={() => history.goBack()} className={styles.clickable}>
+          Back
+        </span>
       </div>
     </div>
   );
