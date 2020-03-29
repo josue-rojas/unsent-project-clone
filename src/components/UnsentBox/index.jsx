@@ -68,8 +68,8 @@ const UnsentBox = ({
 
   const sendData = () => {
     // TODO: make this more efficiencent or at least check when onchange ?!?!
-    const isTextMin = text.length > 0;
-    const isTotMin = toValue.length > 0;
+    const isTextMin = text.trim().length > 0;
+    const isTotMin = toValue.trim().length > 0;
     !isDisabled &&
       sendCallBack &&
       isTotMin &&
