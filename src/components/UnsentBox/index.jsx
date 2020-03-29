@@ -6,6 +6,16 @@ import TextColorPicker from "components/TextColorPicker";
 import DefaultColorPicker from "components/DefaultColorPicker";
 import ColorTextArea from "components/ColorTextArea";
 
+const getRandomInt = max => {
+  return Math.floor(Math.random() * Math.floor(max));
+};
+
+const randomColor = () => {
+  return `rgb(${getRandomInt(256)}, ${getRandomInt(256)}, ${getRandomInt(
+    256
+  )})`;
+};
+
 const UnsentBox = ({
   initBackgroundColor,
   initMessage,
@@ -17,9 +27,9 @@ const UnsentBox = ({
   toOnChange
 }) => {
   const [backgroundColor, backgroundColorChange] = useState(
-    initBackgroundColor
+    initBackgroundColor || randomColor()
   );
-  const [textColor, textColorChange] = useState(initTextColor);
+  const [textColor, textColorChange] = useState(initTextColor || randomColor());
   const [toValue, toValueChange] = useState(initTo);
   const [text, textChange] = useState(initMessage);
 
