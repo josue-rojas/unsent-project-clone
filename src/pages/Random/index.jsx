@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import UnsentBox from "components/UnsentBox";
 import styles from "./styles.module.css";
 import { database } from "firebase.js";
-import { POST_MESSAGE_API, INIT_UNSENT_STATE } from "constants.js";
+import { INIT_UNSENT_STATE, POST_MESSAGE_API } from "constants.js";
 import { useLocation } from "react-router-dom";
 
 // TODO: was implemented with the worst way possible....

@@ -3,13 +3,14 @@ import UnsentBox from "components/UnsentBox";
 import styles from "./styles.module.css";
 import { useParams } from "react-router-dom";
 import { database } from "firebase.js";
-import { POST_MESSAGE_API } from "constants.js";
+import { INIT_UNSENT_STATE, POST_MESSAGE_API } from "constants.js";
 
 const SinglePost = () => {
-  const [message, setMessage] = useState("");
-  const [to, setTo] = useState("");
-  const [backgroundColor, setBackgroundColor] = useState("");
-  const [textColor, setTextColor] = useState("");
+  const [unsentData, setUnsentData] = useState(INIT_UNSENT_STATE);
+  // const [message, setMessage] = useState("");
+  // const [to, setTo] = useState("");
+  // const [backgroundColor, setBackgroundColor] = useState("");
+  // const [textColor, setTextColor] = useState("");
   const { id } = useParams();
 
   useEffect(() => {
@@ -17,15 +18,15 @@ const SinglePost = () => {
       .ref(`${POST_MESSAGE_API}/${id}`)
       .once("value")
       .then(snapshot => {
-        const data = snapshot.val();
-        if (data) {
-          setMessage(data.text);
-          setTo(data.to);
-          setBackgroundColor(data.backgroundColor);
-          setTextColor(data.textColor);
+        const _unsentData = snapshot.val();
+        if (_unsentData) {
+          setUnsentData(_unsentData);
         } else {
-          setMessage(`No Message found with id:\n${id}`);
-          setTo(`ERROR`);
+          setUnsentData({
+            ...unsentData,
+            text: `No Message found with id:\n${id}`,
+            to: "ERROR"
+          });
         }
       });
   }, [id]);
@@ -33,10 +34,10 @@ const SinglePost = () => {
   return (
     <div className={styles.singlePost}>
       <UnsentBox
-        initBackgroundColor={backgroundColor}
-        initMessage={message}
-        initTextColor={textColor}
-        initTo={to}
+        initBackgroundColor={unsentData.backgroundColor}
+        initMessage={unsentData.text}
+        initTextColor={unsentData.textColor}
+        initTo={unsentData.to}
         isDisabled={true}
       />
     </div>
