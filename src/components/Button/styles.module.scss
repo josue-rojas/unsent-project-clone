@@ -1,0 +1,81 @@
+.button {
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  min-width: 100px;
+  outline: none;
+  padding: 10px 16px;
+  text-decoration: none;
+  vertical-align: middle;
+  transition: background-color 150ms;
+
+  &.default:not(.disabled) {
+    background-color: var(--white);
+    border: 1px solid var(--light-gray);
+    &.none {
+      color: var(--gray);
+    }
+    &.success {
+      color: var(--green);
+    }
+    &.warning {
+      color: var(--orange);
+    }
+    &.danger {
+      color: var(--red);
+    }
+    &:hover {
+      background-color: rgba(67, 90, 111, 0.04);
+    }
+  }
+
+  &.primary:not(.disabled) {
+    box-shadow: inset 0 0 0 1px rgba(67, 90, 111, 0.14),
+      inset 0 -1px 1px 0 rgba(67, 90, 111, 0.06);
+    color: white;
+
+    &.none {
+      background-color: var(--blue);
+    }
+    &.success {
+      background-color: var(--green);
+    }
+    &.warning {
+      background-color: var(--orange);
+    }
+    &.danger {
+      background-color: var(--red);
+    }
+  }
+
+  &.minimal:not(.disabled) {
+    background-color: var(--white);
+    &.none {
+      color: var(--blue);
+    }
+    &.success {
+      color: var(--green);
+    }
+    &.warning {
+      color: var(--orange);
+    }
+    &.danger {
+      color: var(--red);
+    }
+
+    &:hover {
+      background-color: rgba(67, 90, 111, 0.06);
+    }
+  }
+
+  &.disabled {
+    background-color: rgba(67, 90, 111, 0.06);
+    background-image: none;
+    box-shadow: none;
+    color: rgba(67, 90, 111, 0.7);
+    cursor: not-allowed;
+    opacity: 0.8;
+    pointer-events: none;
+  }
+}

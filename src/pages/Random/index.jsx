@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import UnsentBox from "components/UnsentBox";
 import styles from "./styles.module.css";
-import { database } from "firebase.js";
+import { database } from "firebaseService.js";
+import { ref, onValue } from "firebase/database";
 import { INIT_UNSENT_STATE, POST_MESSAGE_API } from "constants.js";
 import { useLocation } from "react-router-dom";
 
@@ -19,22 +20,20 @@ const Random = () => {
   const location = useLocation();
 
   useEffect(() => {
-    database
-      .ref(`${POST_MESSAGE_API}`)
-      .once("value")
-      .then(snapshot => {
-        if (snapshot.val()) {
-          const data = Object.entries(snapshot.val());
-          const randomIndex = getRandomInt(0, data.length);
-          const _unsentData = data[randomIndex][1];
-          setUnsentData(_unsentData);
-        } else {
-          setUnsentData({
-            text: "No Message Found",
-            to: "ERROR"
-          });
-        }
-      });
+    const postRref = ref(database, POST_MESSAGE_API);
+    onValue(postRref, snapshot => {
+      if (snapshot.val()) {
+        const data = Object.entries(snapshot.val());
+        const randomIndex = getRandomInt(0, data.length);
+        const _unsentData = data[randomIndex][1];
+        setUnsentData(_unsentData);
+      } else {
+        setUnsentData({
+          text: "No Message Found",
+          to: "ERROR"
+        });
+      }
+    })
   }, [location]);
 
   return (

@@ -30,3 +30,16 @@ a:visited {
 a:hover {
   opacity: 0.7;
 }
+
+
+:root {
+  --dark-green: #079569;
+  --green: rgb(91, 203, 172);
+  --white: white;
+  --gray: rgb(80, 80, 80);
+  --light-gray: rgb(213, 213, 213);
+  --red: #d64540;
+  --blue: #0788de;
+  --orange: #ee9913;
+  /* linear-gradient(to bottom, #EC4C47, #D64540) */
+}

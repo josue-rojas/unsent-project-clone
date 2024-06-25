@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import UnsentBox from "components/UnsentBox";
 import styles from "./styles.module.css";
 import { useParams } from "react-router-dom";
-import { database } from "firebase.js";
+import { ref, onValue } from "firebase/database";
+import { database as db} from 'firebaseService'
 import { INIT_UNSENT_STATE, POST_MESSAGE_API } from "constants.js";
 
 const SinglePost = () => {
@@ -14,21 +15,20 @@ const SinglePost = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    database
-      .ref(`${POST_MESSAGE_API}/${id}`)
-      .once("value")
-      .then(snapshot => {
-        const _unsentData = snapshot.val();
-        if (_unsentData) {
-          setUnsentData(_unsentData);
-        } else {
-          setUnsentData({
-            ...unsentData,
-            text: `No Message found with id:\n${id}`,
-            to: "ERROR"
-          });
-        }
-      });
+    const postRref = ref(db, `${POST_MESSAGE_API}/${id}`);
+    onValue(postRref, snapshot => {
+      const _unsentData = snapshot.val();
+      if (_unsentData) {
+        setUnsentData(_unsentData);
+      } else {
+        setUnsentData({
+          ...unsentData,
+          text: `No Message found with id:\n${id}`,
+          to: "ERROR"
+        });
+      }
+    })
+
   }, [id]);
 
   return (

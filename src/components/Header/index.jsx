@@ -23,6 +23,16 @@ const Header = () => {
           <li>
             <Link
               className={classNames({
+                [styles.active]: location.pathname === "/all"
+              })}
+              to={{ pathname: "/all", state: { refreshDate: false } }}
+            >
+              All
+            </Link>
+          </li>
+          <li>
+            <Link
+              className={classNames({
                 [styles.active]: location.pathname === "/random"
               })}
               to={{ pathname: "/random", state: { refreshDate: false } }}

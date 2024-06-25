@@ -4,6 +4,7 @@ import Home from "pages/Home";
 import SinglePost from "pages/SinglePost";
 import NoMatch from "pages/NoMatch";
 import Random from "pages/Random";
+import AllPost from "pages/AllPost";
 
 export default function Routes() {
   return (
@@ -17,6 +18,9 @@ export default function Routes() {
         </Route>
         <Route exact path="/random">
           <Random />
+        </Route>
+        <Route exact path="/all">
+          <AllPost />
         </Route>
         <Route path="*">
           <NoMatch />
